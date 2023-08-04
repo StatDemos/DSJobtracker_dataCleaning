@@ -74,7 +74,7 @@ data1 <- data1 %>% mutate(`Payment Frequency` = case_when(
 ))
 
 
-
+write_csv(data1, "DStidy_2022.csv")
 
 
 
