@@ -1,7 +1,7 @@
 library(tidyverse)
 library(readxl)
 
-data <- read_xlsx("DSjobtracker_2022.xlsx")
+data <- read_csv("DSjobtracker_2022.csv")
 
 # Filter the columns
 
@@ -73,35 +73,50 @@ data1 <- data1 %>% mutate(`Payment Frequency` = case_when(
   
 ))
 
+# Categorizing location column
+
+data1 <- data1 %>% mutate(Location = case_when(
+  Location %in% c("Sri Lanka", "Sri lanka") ~ "Sri Lanka",
+  Location %in% c("NA", NA, "EMEA", "South Asia") ~ NA,
+  Location %in% c("UAE", "Dubai, UAE") ~ "United Arab Emirates",
+  Location %in% c("United States", "United States of America") ~ "USA",
+  Location %in% c("United Kingdom", "England", "Ireland") ~ "UK",
+  Location %in% c("Austra", "Austrailia") ~ "Australia",
+  Location == "Singapore" ~ "Singapore",
+  Location == "New Zealand" ~ "New Zealand",
+  Location == "Tunisia" ~ "Tunisia",
+  Location == "Japan" ~ "Japan",
+  Location == "Denmark" ~ "Denmark",
+  Location == "Hungary" ~ "Hungary",
+  Location == "India" ~ "India",
+  Location == "Germany" ~ "Germany",
+  Location == "Greece" ~ "Greece",
+  Location == "Lithuania" ~ "Lithuania",
+  Location == "Sweden" ~ "Sweden",
+  Location == "Poland" ~ "Poland",
+  Location == "Malaysia" ~ "Malaysia",
+  Location == "Spain" ~ "Spain",
+  Location == "Belgium" ~ "Belgium",
+  Location == "Vietnam, Thailand, Indonesia" ~ "Thailand",
+  Location == "Ecuador" ~ "Ecuador",
+  Location == "Netherlands" ~ "Netherlands",
+  Location == "Finland" ~ "Finland",
+  Location == "Romania" ~ "Romania",
+  Location == "Mexico" ~ "Mexico",
+  Location == "Italy" ~ "Italy",
+  Location == "Virginia" ~ "Virginia",
+  Location == "Czech Republic" ~ "Czech Republic",
+  Location == "Turkey" ~ "Turkey",
+  Location == "China" ~ "China",
+  Location == "Canada" ~ "Canada",
+  Location == "Switzerland" ~ "Switzerland",
+  Location == "Russia" ~ "Russia",
+  Location == "Malta" ~ "Malta",
+  Location == "Qatar" ~ "Qatar",
+  Location == "Portugal" ~ "Portugal",
+  Location == "Bulgaria" ~ "Bulgaria"
+))
+
+# Export dataset
 
 write_csv(data1, "DStidy_2022.csv")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
