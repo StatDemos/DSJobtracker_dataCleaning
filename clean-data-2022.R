@@ -168,15 +168,12 @@ data1 <- data1 %>% mutate(country_code = case_when(
 
 # Education qualification
 
-
 data1$Educational_qualifications <- paste(data1$BSc_needed,data1$MSc_needed,data1$PhD_needed,sep=",")
-data1
+
 
 #data1$Educational_qualifications <- gsub(".*0_0_0.*",NA,data1$Educational_qualifications)
 
 # Knowledge In 
-
-
 
 data1 <- data1 %>% unite("Knowledge_in")
 
