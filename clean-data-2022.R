@@ -27,7 +27,7 @@ column_names <- c("Job_Level", "Duplicate/Unique", "Experience UL (in years)",
                   "Research Skills", "Crystal Reports", "CIMA", "ACCA", "CIM",                                                   
                   "CA", "CFA", "Chartered Engineer",
                   "Educational qualifications (if they need more than 1)", "Diploma",
-                  "Mphil", "Data_translation")
+                  "Mphil")
 
 data1 <- data %>% select(-column_names)
 
@@ -38,8 +38,8 @@ data1 <- data1 %>% rename( "Salary"="Salary LL",
                          "MSc_needed"="MSc", "PhD_needed"="Dphil/PhD","Job_Field"="Industry", "Minimum Experience in Years"="Experience LL (in years)","Job_Category"="Job_Field"
                         )
 
-data1 <- data1 %>% mutate(Knowledge_in = rep(NA, 360), year = rep(2022,360),`English proficiency description` = rep(NA,360),
-                          Educational_qualifications = rep(NA, 360),Location=rep(NA,360))
+data1 <- data1 %>% mutate(Knowledge_in = rep(NA, 360),`English proficiency description` = rep(NA,360),
+                          Location=rep(NA,360))
 
 
 dim(data1)
@@ -168,11 +168,15 @@ data1 <- data1 %>% mutate(country_code = case_when(
 
 # Education qualification
 
-data1 <- data1 %>% unite("Educational_qualifications",c("BSc_needed","MSc_needed", "PhD_needed"))
+
+data1$Educational_qualifications <- paste(data1$BSc_needed,data1$MSc_needed,data1$PhD_needed,sep=",")
 data1
-data1$Educational_qualifications <- gsub(".*0_0_0.*",NA,data1$Educational_qualifications)
+
+#data1$Educational_qualifications <- gsub(".*0_0_0.*",NA,data1$Educational_qualifications)
 
 # Knowledge In 
+
+
 
 data1 <- data1 %>% unite("Knowledge_in")
 
